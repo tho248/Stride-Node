@@ -39,93 +39,93 @@ Chú ý đến tham số bên dưới rpc_addr, grpc_addr, websocket_addr --Nế
 
 ##Ví dụ về Config.toml cho JUNO & STRIDE (STRIDE và HERMES nằm trên cùng một VPS, JUNO nằm trên một VPS khác)
 
-   sudo tee $HOME/.hermes/config.toml > /dev/null <<EOF
-   [global]
-   log_level = 'info'
+     sudo tee $HOME/.hermes/config.toml > /dev/null <<EOF
+     [global]
+     log_level = 'info'
 
-   [mode]
-   [mode.clients]
-   enabled = true
-   refresh = true
-   misbehaviour = true
+     [mode]
+     [mode.clients]
+     enabled = true
+     refresh = true
+     misbehaviour = true
 
-   [mode.connections]
-   enabled = false
+     [mode.connections]
+     enabled = false
 
-   [mode.channels]
-   enabled = false
+     [mode.channels]
+     enabled = false
 
-   [mode.packets]
-   enabled = true
-   clear_interval = 100
-   clear_on_start = true
-   tx_confirmation = false
+     [mode.packets]
+     enabled = true
+     clear_interval = 100
+     clear_on_start = true
+     tx_confirmation = false
 
-   [rest]
-   enabled = true
-   host = '127.0.0.1'
-   port = 3000
+     [rest]
+     enabled = true
+     host = '127.0.0.1'
+     port = 3000
 
-   [telemetry]
-   enabled = true
-   host = '127.0.0.1'
-   port = 3001
+     [telemetry]
+     enabled = true
+     host = '127.0.0.1'
+     port = 3001
 
-   [[chains]]
-   id = 'STRIDE-TESTNET-2'
-   rpc_addr = 'http://161.97.149.123:26957'
-   grpc_addr = 'http://161.97.149.123:9490'
-   websocket_addr = 'ws://161.97.149.123:26957/websocket'
-   rpc_timeout = '300s'
-   account_prefix = 'stride'
-   key_name = 'stride-rly'
-   address_type = { derivation = 'cosmos' }
-   store_prefix = 'ibc'
-   default_gas = 100000
-   max_gas = 4000000
-   gas_price = { price = 0.001, denom = 'ustrd' }
-   gas_multiplier = 1.2
-   max_msg_num = 30
-   max_tx_size = 2097152
-   clock_drift = '30s'
-   max_block_time = '30s'
-   trusting_period = '36000s'
-   trust_threshold = { numerator = '1', denominator = '3' }
+     [[chains]]
+     id = 'STRIDE-TESTNET-2'
+     rpc_addr = 'http://161.97.149.123:26957'
+     grpc_addr = 'http://161.97.149.123:9490'
+     websocket_addr = 'ws://161.97.149.123:26957/websocket'
+     rpc_timeout = '300s'
+     account_prefix = 'stride'
+     key_name = 'stride-rly'
+     address_type = { derivation = 'cosmos' }
+     store_prefix = 'ibc'
+     default_gas = 100000
+     max_gas = 4000000
+     gas_price = { price = 0.001, denom = 'ustrd' }
+     gas_multiplier = 1.2
+     max_msg_num = 30
+     max_tx_size = 2097152
+     clock_drift = '30s'
+     max_block_time = '30s'
+     trusting_period = '36000s'
+     trust_threshold = { numerator = '1', denominator = '3' }
 
-   memo_prefix = DISDCORD-ID
-   [chains.packet_filter]
-   policy = 'allow'
-   list = [
-   ['transfer', '*']
-   ]
+     memo_prefix = DISDCORD-ID
+     [chains.packet_filter]
+     policy = 'allow'
+     list = [
+     ['transfer', '*']
+     ]
 
-   [[chains]]
-   id = 'uni-3'
-   rpc_addr = 'http://159.223.4.92:22657'
-   grpc_addr = 'http://159.223.4.92:22090'
-   websocket_addr = 'ws://159.223.4.92:22657/websocket'
-   rpc_timeout = '300s'
-   account_prefix = 'juno'
-   key_name = 'juno-rly'
-   store_prefix = 'ibc'
-   default_gas = 100000
-   max_gas = 4000000
-   gas_price = { price = 0.001, denom = 'ujunox' }
-   gas_multiplier = 1.2
-   max_msg_num = 30
-   max_tx_size = 2097152
-   clock_drift = '30s'
-   max_block_time = '30s'
-   trusting_period = '2days'
-   trust_threshold = { numerator = '1', denominator = '3' }
-   memo_prefix = DISDCORD-ID
-   address_type = { derivation = 'cosmos' }
-   [chains.packet_filter]
-   policy = 'allow'
-   list = [
-   ['transfer', '*']
-   ]
-   EOF
+     [[chains]]
+     id = 'uni-3'
+     rpc_addr = 'http://159.223.4.92:22657'
+     grpc_addr = 'http://159.223.4.92:22090'
+     websocket_addr = 'ws://159.223.4.92:22657/websocket'
+     rpc_timeout = '300s'
+     account_prefix = 'juno'
+     key_name = 'juno-rly'
+     store_prefix = 'ibc'
+     default_gas = 100000
+     max_gas = 4000000
+     gas_price = { price = 0.001, denom = 'ujunox' }
+     gas_multiplier = 1.2
+     max_msg_num = 30
+     max_tx_size = 2097152
+     clock_drift = '30s'
+     max_block_time = '30s'
+     trusting_period = '2days'
+     trust_threshold = { numerator = '1', denominator = '3' }
+     memo_prefix = DISDCORD-ID
+     address_type = { derivation = 'cosmos' }
+     [chains.packet_filter]
+     policy = 'allow'
+     list = [
+     ['transfer', '*']
+     ]
+     EOF
    
 ##Config.toml cho GAIA & STRIDE
 
