@@ -2,7 +2,8 @@
 # RPC Endpoint of GAIA fullnode, Juno fullnode
 Nếu bạn định thiết lập nút của riêng mình, hãy làm theo hướng dẫn dưới đây từ kjnode
 
-Hướng dẫn thiết lập nút Juno : https://github.com/kj89/testnet_manuals/tree/main/juno Hướng dẫn thiết lập nút GAIA : https://github.com/kj89/testnet_manuals/blob/main/stride/GAIA/README.md
+Hướng dẫn thiết lập nút Juno : https://github.com/kj89/testnet_manuals/tree/main/juno 
+Hướng dẫn thiết lập nút GAIA : https://github.com/kj89/testnet_manuals/blob/main/stride/GAIA/README.md
 
 Nếu không, bạn có thể sử dụng một số điểm cuối RPC công khai của GAIA hoặc Juno fullnode . Ở đây giả sử Stride và hermes được cài đặt trên cùng 1 vps , gaia và juno lấy điểm RPC công khai của người khác
 
@@ -10,31 +11,32 @@ Nếu không, bạn có thể sử dụng một số điểm cuối RPC công kh
 
 # Đặt trình chỉ mục thành kv trên mỗi chuỗi
 
-   sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $HOME/.stride/config/config.toml
-   sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $HOME/.juno/config/config.toml
-   sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $HOME/.gaia/config/config.toml
+      sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $HOME/.stride/config/config.toml
+      sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $HOME/.juno/config/config.toml
+      sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $HOME/.gaia/config/config.toml
    
 # Hiển thị điểm cuối RPC của bạn cho công chúng,(Nếu Hermes và các fullnode của bạn là cùng một vps, không cần phải làm điều đó)
 
-   sed -i.bak -e 's|^laddr = \"tcp:\/\/.*:\([0-9].*\)57\"|laddr = \"tcp:\/\/0\.0\.0\.0:\157\"|' $HOME/.stride/config/config.toml
-   sed -i.bak -e 's|^laddr = \"tcp:\/\/.*:\([0-9].*\)57\"|laddr = \"tcp:\/\/0\.0\.0\.0:\157\"|' $HOME/.juno/config/config.toml
-   sed -i.bak -e 's|^laddr = \"tcp:\/\/.*:\([0-9].*\)57\"|laddr = \"tcp:\/\/0\.0\.0\.0:\157\"|' $HOME/.gaia/config/config.toml
+      sed -i.bak -e 's|^laddr = \"tcp:\/\/.*:\([0-9].*\)57\"|laddr = \"tcp:\/\/0\.0\.0\.0:\157\"|' $HOME/.stride/config/config.toml
+      sed -i.bak -e 's|^laddr = \"tcp:\/\/.*:\([0-9].*\)57\"|laddr = \"tcp:\/\/0\.0\.0\.0:\157\"|' $HOME/.juno/config/config.toml
+      sed -i.bak -e 's|^laddr = \"tcp:\/\/.*:\([0-9].*\)57\"|laddr = \"tcp:\/\/0\.0\.0\.0:\157\"|' $HOME/.gaia/config/config.toml
    
 ##Restart lại tất cả node sau khi thay đổi ở bước 3 & 4
 
 # Cài đặt Hermes
 
-   mkdir -p $HOME/.hermes/bin
-   cd $HOME/.hermes/bin
-   wget https://github.com/informalsystems/ibc-rs/releases/download/v1.0.0-rc.0/hermes-v1.0.0-rc.0-x86_64-unknown-linux-gnu.tar.gz
-   tar -C $HOME/.hermes/bin/ -vxzf hermes-v1.0.0-rc.0-x86_64-unknown-linux-gnu.tar.gz
-   echo 'export PATH="$HOME/.hermes/bin:$PATH"' >> $HOME/.bash_profile
-   source $HOME/.bash_profile
-    hermes version
+      mkdir -p $HOME/.hermes/bin
+      cd $HOME/.hermes/bin
+      wget https://github.com/informalsystems/ibc-rs/releases/download/v1.0.0-rc.0/hermes-v1.0.0-rc.0-x86_64-unknown-linux-gnu.tar.gz
+      tar -C $HOME/.hermes/bin/ -vxzf hermes-v1.0.0-rc.0-x86_64-unknown-linux-gnu.tar.gz
+      echo 'export PATH="$HOME/.hermes/bin:$PATH"' >> $HOME/.bash_profile
+      source $HOME/.bash_profile
+      hermes version
     
 # Tạo Config cho Hermes:
 
 Chú ý đến tham số bên dưới rpc_addr, grpc_addr, websocket_addr --Nếu Hermes và fullnode của bạn trên cùng một vps, định dạng của tham số này sẽ là: rpc_addr = ' http: // localhost: RPC_PORT ' (Rerfe bước 5) --Nếu Hermes và fullnode của bạn ở các vps khác nhau, định dạng của tham số này sẽ là: rpc_addr = 'http: // VPS_IP: RPC_PORT' (Tham khảo bước 5) *Tham số key_name phải giống với tên của ví sẽ được thêm vào Hermes sau này
+
 ##Ví dụ về Config.toml cho JUNO & STRIDE (STRIDE và HERMES nằm trên cùng một VPS, JUNO nằm trên một VPS khác)
 
    sudo tee $HOME/.hermes/config.toml > /dev/null <<EOF
@@ -234,20 +236,21 @@ Tạo một cái mới sau đó áp dụng vòi
          junod keys show WALLET_NAME --output json | jq > /root/.hermes/juno-rly.json
          
 ###Add 24 seed phrases of wallet into json file, after that the file will be as below
-      cat /root/.hermes/stride-rly.json
-      {
-      "name":"stride-rly",
-      "type":"local",
-      "address":"WALLET-ADDRESS",
-      "pubkey":"{\"@type\":\"/cosmos.crypto.secp256k1.PubKey\",\"key\":\"PUBLIC-KEY\"}",
-      "mnemonic":"24 seed phrases"
-       }
+   
+        cat /root/.hermes/stride-rly.json
+        {
+        "name":"stride-rly",
+        "type":"local",
+        "address":"WALLET-ADDRESS",
+        "pubkey":"{\"@type\":\"/cosmos.crypto.secp256k1.PubKey\",\"key\":\"PUBLIC-KEY\"}",
+        "mnemonic":"24 seed phrases"
+         }
 # Nhập ví vào hermes
 
-      cd /root/.hermes/
-      hermes keys add --chain STRIDE-TESTNET-2 --key-file stride-rly.json
-      hermes keys add --chain uni-3 --key-file juno-rly.json
-      hermes keys add --chain GAIA --key-file gaia-rly.json
+        cd /root/.hermes/
+        hermes keys add --chain STRIDE-TESTNET-2 --key-file stride-rly.json
+        hermes keys add --chain uni-3 --key-file juno-rly.json
+        hermes keys add --chain GAIA --key-file gaia-rly.json
       
 # Kiểm tra tình trạng và xác thực cấu hình
 
